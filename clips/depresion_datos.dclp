@@ -1,0 +1,14 @@
+; Base de Datos.
+; Practica # - ...
+; Sarmiento Bryan, Zhizhpon Eduardo.
+
+(persona 
+    (nombre-apellido "Eduardo" "Zhizhpon") 
+    (indice-humor-ansioso 2) (indice-tension 1)
+    (indice-temor 1) (indice-insomio 2)
+    (indice-funciones-intelectuales 0) (indice-humor-depresivo 1)
+    (indice-somanticos-musculares 1) (indice-somanticos-sensoriales 2)
+    (indice-cardiovasculares 1) (indice-respiratorio 2)
+    (indice-gastrointestinales 1) (indice-genitourinarios 1)
+    (indice-sistema-nervioso-autonomo 2) (indice-conducta-test 3)
+)
