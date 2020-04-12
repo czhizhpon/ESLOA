@@ -112,7 +112,7 @@
     then
         (printout t ?total " Ansiedad Nula " crlf)
     )
-
+    
     (if (and
 			(> ?total 0)
 			(< ?total 17)
