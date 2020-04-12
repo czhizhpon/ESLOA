@@ -8,8 +8,6 @@
     (multislot nombre-apellido 
         (type STRING)
         (default "vacio")
-        (cardinality 1 2)
-
     )
     (slot indice-humor-ansioso
         (type INTEGER)
@@ -114,8 +112,11 @@
     then
         (printout t ?total " Ansiedad Nula " crlf)
     )
-
-    (if (< ?total 17)
+    
+    (if (and
+			(> ?total 0)
+			(< ?total 17)
+		)
     then
         (printout t ?total " Ansiedad Leve " crlf)
     )
@@ -128,10 +129,7 @@
         (printout t ?total " Ansiedad Moderado " crlf)
     )
     
-    (if (and
-            (>= ?total 24)
-            (<= ?total 30)
-        )
+    (if (>= ?total 24)
     then
         (printout t ?total " Ansiedad Severa " crlf)
     )
