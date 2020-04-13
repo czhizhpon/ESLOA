@@ -5,6 +5,8 @@
  */
 package ec.edu.ups.main;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,13 +32,47 @@ public class Formulario extends javax.swing.JFrame {
     public Formulario() {
         try {
             initComponents();
-            
             clips = new Environment();
-            
             clips.load("clips/bc_depresion.clp");
+            
+            this.addWindowListener(new WindowListener() {
+                @Override
+                public void windowOpened(WindowEvent e) {
+                }
+
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    try {
+                        clips.reset();
+                        System.out.println("Clips Reset");
+                    } catch (CLIPSException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void windowClosed(WindowEvent e) {
+                }
+
+                @Override
+                public void windowIconified(WindowEvent e) {
+                }
+
+                @Override
+                public void windowDeiconified(WindowEvent e) {
+                }
+
+                @Override
+                public void windowActivated(WindowEvent e) {
+                }
+
+                @Override
+                public void windowDeactivated(WindowEvent e) {
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("adsadasdasdasdasfdAD?F.hgnjsjnfc"+e.toString());
+            System.out.println("Error: \n"+e.toString());
         }
         
         
@@ -313,7 +349,7 @@ public class Formulario extends javax.swing.JFrame {
     }//GEN-LAST:event_tNombreActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nombre, hecho, input;
+        String nombre, hecho;
         int ansioso, tension, temor, insomnio, intelectual, depresivo, musculares, 
                 sensoriales, cardiovasculares, respiratorio, gastrointestinales, 
                 genitourinarios, sisAuto, conducta;
@@ -338,8 +374,6 @@ public class Formulario extends javax.swing.JFrame {
                                                        Router.STDERR,
                                                        Router.STDWRN } );
         
-        
-        
         hecho = "(assert "+ 
                     "(persona "+
                         " (nombre-apellido \" "+ nombre +" \") "+
@@ -361,18 +395,10 @@ public class Formulario extends javax.swing.JFrame {
                 " )";
         try {
             
-            
-            
-            clips.reset();
             System.out.println(""+clips.eval(hecho).toString());
             clips.run();
-            
             System.out.println("Output: " + theRouter.getOutput());
             theRouter.clear();
-            
-            
-            input = clips.getInputBuffer();
-            //System.out.println("INPUT> " + input);
             
         } catch (Exception ex) {
             System.out.println(""+ex.toString());
