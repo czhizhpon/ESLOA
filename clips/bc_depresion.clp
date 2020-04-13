@@ -105,7 +105,6 @@
                     ?musculares ?sensoriales ?cardio ?respiratorio ?gastrointestinales 
                     ?genitourinarios ?nervioso ?ctest
                 )
-
     )
 
     (if (= ?total 0)
@@ -133,4 +132,6 @@
     then
         (printout t ?total " Ansiedad Severa " crlf)
     )
+
+    (save-facts "clips/facts_data.dat")
 )
