@@ -19,7 +19,6 @@ import net.sf.clipsrules.jni.Router;
  */
 public class Formulario extends javax.swing.JFrame {
     
-    
     Environment clips;
     CaptureRouter capture;
     
@@ -70,8 +69,6 @@ public class Formulario extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        
     }
 
     /**
@@ -191,7 +188,7 @@ public class Formulario extends javax.swing.JFrame {
 
         cGenito.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ausente", "Leve", "Moderado", "Grave", "Muy grave" }));
 
-        jLabel15.setText("13. Síntomas autónomos (Boca seca, ruborm palidez, cefalea, entre otros)");
+        jLabel15.setText("13. Síntomas autónomos (Boca seca, rubor, palidez, cefalea, entre otros)");
 
         cConducta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ausente", "Leve", "Moderado", "Grave", "Muy grave" }));
         cConducta.addActionListener(new java.awt.event.ActionListener() {
@@ -319,9 +316,8 @@ public class Formulario extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cNervioso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15))
-                        .addGap(2, 2, 2)))
-                .addGap(20, 20, 20)
+                            .addComponent(jLabel15))))
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(cConducta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))

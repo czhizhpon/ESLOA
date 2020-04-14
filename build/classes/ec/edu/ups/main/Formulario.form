@@ -477,7 +477,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel15">
       <Properties>
-        <Property name="text" type="java.lang.String" value="13. S&#xed;ntomas aut&#xf3;nomos (Boca seca, ruborm palidez, cefalea, entre otros)"/>
+        <Property name="text" type="java.lang.String" value="13. S&#xed;ntomas aut&#xf3;nomos (Boca seca, rubor, palidez, cefalea, entre otros)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cConducta">
