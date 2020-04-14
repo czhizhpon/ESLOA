@@ -7,11 +7,8 @@ package ec.edu.ups.main;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import net.sf.clipsrules.jni.CLIPSException;
-import net.sf.clipsrules.jni.CLIPSLoadException;
 import net.sf.clipsrules.jni.CaptureRouter;
 import net.sf.clipsrules.jni.Environment;
 import net.sf.clipsrules.jni.Router;
@@ -24,7 +21,7 @@ public class Formulario extends javax.swing.JFrame {
     
     
     Environment clips;
-    CaptureRouter theRouter;
+    CaptureRouter capture;
     
     /**
      * Creates new form Formulario
@@ -32,6 +29,7 @@ public class Formulario extends javax.swing.JFrame {
     public Formulario() {
         try {
             initComponents();
+            setLocationRelativeTo(null);
             clips = new Environment();
             clips.load("clips/bc_depresion.clp");
             
@@ -44,7 +42,6 @@ public class Formulario extends javax.swing.JFrame {
                 public void windowClosing(WindowEvent e) {
                     try {
                         clips.reset();
-                        System.out.println("Clips Reset");
                     } catch (CLIPSException ex) {
                         ex.printStackTrace();
                     }
@@ -72,7 +69,6 @@ public class Formulario extends javax.swing.JFrame {
             });
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Error: \n"+e.toString());
         }
         
         
@@ -352,7 +348,10 @@ public class Formulario extends javax.swing.JFrame {
         int ansioso, tension, temor, insomnio, intelectual, depresivo, musculares, 
                 sensoriales, cardiovasculares, respiratorio, gastrointestinales, 
                 genitourinarios, sisAuto, conducta;
-        
+        if (tNombre.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese su nombre.");
+            return;
+        }
         nombre = tNombre.getText();
         ansioso = cHumor.getSelectedIndex();
         tension = cTension.getSelectedIndex();
@@ -369,43 +368,40 @@ public class Formulario extends javax.swing.JFrame {
         sisAuto = cNervioso.getSelectedIndex();
         conducta = cConducta.getSelectedIndex();
         
-        theRouter = new CaptureRouter(clips,new String [] { Router.STDOUT, 
-                                                       Router.STDERR,
-                                                       Router.STDWRN } );
+        capture = new CaptureRouter(clips,new String [] 
+            {Router.STDOUT, Router.STDERR, Router.STDWRN});
         
         hecho = "(assert "+ 
                     "(persona "+
-                        " (nombre-apellido \" "+ nombre +" \") "+
-                        " (indice-humor-ansioso "+ansioso+") "+
-                        " (indice-tension "+tension+") "+
-                        " (indice-temor "+temor+") "+
-                        " (indice-insomio "+insomnio+") "+
-                        " (indice-funciones-intelectuales "+intelectual+") "+
-                        " (indice-humor-depresivo "+depresivo+") "+
-                        " (indice-somanticos-musculares "+musculares+") "+
-                        " (indice-somanticos-sensoriales "+sensoriales+") "+
-                        " (indice-cardiovasculares "+cardiovasculares+") "+
-                        " (indice-respiratorio "+respiratorio+") "+
-                        " (indice-gastrointestinales "+gastrointestinales+") "+
-                        " (indice-genitourinarios "+genitourinarios+") "+
-                        " (indice-sistema-nervioso-autonomo "+sisAuto+") "+
-                        " (indice-conducta-test "+conducta+") "+
+                        " (nombre-apellido \"" + nombre + "\") "+
+                        " (indice-humor-ansioso " + ansioso + ") "+
+                        " (indice-tension " + tension + ") "+
+                        " (indice-temor " + temor + ") "+
+                        " (indice-insomio " + insomnio + ") "+
+                        " (indice-funciones-intelectuales " + intelectual + ") "+
+                        " (indice-humor-depresivo " + depresivo +") "+
+                        " (indice-somanticos-musculares " + musculares +") "+
+                        " (indice-somanticos-sensoriales " + sensoriales +") "+
+                        " (indice-cardiovasculares " + cardiovasculares +") "+
+                        " (indice-respiratorio " + respiratorio+") "+
+                        " (indice-gastrointestinales " + gastrointestinales + ") "+
+                        " (indice-genitourinarios " + genitourinarios + ") "+
+                        " (indice-sistema-nervioso-autonomo " + sisAuto +") "+
+                        " (indice-conducta-test " + conducta + ") "+
                    " ) "+
                 " )";
         try {
             
-            System.out.println(""+clips.eval(hecho).toString());
+            clips.eval(hecho);
             clips.run();
-            System.out.println("Output: " + theRouter.getOutput());
-            this.textResp.setText(this.tNombre.getText() + ", tu resultado es: " + theRouter.getOutput());
-            theRouter.clear();
-            
+            this.textResp.setText(this.tNombre.getText() + ", "
+                    + "tu resultado es: " + capture.getOutput());
+            capture.clear();
         } catch (Exception ex) {
-            System.out.println(""+ex.toString());
-            Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         //clips.destroy();
-        clips.deleteRouter(theRouter);
+//        clips.deleteRouter(capture);
              
     }//GEN-LAST:event_jButton1ActionPerformed
 
